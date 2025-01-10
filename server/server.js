@@ -10,8 +10,10 @@ app.use(cors());
 app.use(bodyParser.json());
 dotenv.config();
 const registerRoutes = require('./routes/Account/AccountRegistration/registerRoutes');
+const AdminRoutes = require('./routes/Admin/AdminRoute');
 
 app.use('/v1/account', registerRoutes);
+app.use('/v1/admin', AdminRoutes);
 
 
 const redisClient = redis.createClient({
@@ -24,6 +26,7 @@ if(redisClient.isOpen){
 else{
     console.log("Redis not connected");
 }
+
 
 
 app.get('/', (req, res) => {
