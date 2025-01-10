@@ -24,7 +24,7 @@ const AdminRegister = async (req, res) => {
       await newAdmin.save();
       return res
         .status(200)
-        .json({ message: "Admin registered successfully" }, newAdmin.AdminId);
+        .json({ message: "Admin registered successfully" , adminId:newAdmin.AdminId});
     }
   } catch (error) {
     return res
@@ -32,3 +32,5 @@ const AdminRegister = async (req, res) => {
       .json({ message: "Internal server error", error: error });
   }
 };
+
+module.exports = AdminRegister;
