@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import logo from "../../../public/goat-icon.svg";
+import logo from "../../../public/finegoat.png";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -9,6 +9,7 @@ import { Button } from "../../components/ui/button";
 
 import { Input } from "../../components/ui/input";
 import Modal from "../Modal/modal";
+import steak from "../../../public/steak.jpg";
 
 import {
   InputOTP,
@@ -68,18 +69,25 @@ function RegisterForm() {
   };
 
   return (
-    <div className="xl:grid xl:grid-cols-2 bg-sky-200 ">
+    <div className="xl:grid grid-cols-2 mb:flex flex-col justify-evenly h-screen "
+    style={{
+      backgroundImage: `url(${steak.src})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}
+    >
       <div
-        style={{
-          borderEndStartRadius: "70em 70em",
-          borderStartEndRadius: "70em 70em",
-        }}
-        className={` bg-green-400 xl:h-screen mb:hidden xl:inline-block  flex justify-center items-center flex-col relative z-10 `}
+        // style={{
+        //   borderEndStartRadius: "70em 70em",
+        //   borderStartEndRadius: "70em 70em",
+        // }}
+        className={` h-screen flex justify-center rounded-full items-center flex-col relative z-10 xl:flex mb:hidden `}
       >
-        <Image src={logo} alt="Login-logo" className="xl:size-[20em] lg:size-[10em]" />
-        <div className="xl:text-[4rem] lg:text-[3rem] mt-10 ml-14 tracking-widest relative flex items-center z-10">
+        <Image src={logo} alt="Login-logo" className="rounded-full" objectFit="cover" layout="fill" />
+        <div className="text-[4rem] mt-10 tracking-widest absolute bottom-[0.7em] w-[8em] flex-row justify-center left-[3.5em] flex items-center z-10 bg-yellow-300 rounded-[5em]">
           FineGoat
-          <div className="rounded-full absolute -top-3 -left-5 -z-20  h-[2em] w-[8em] bg-yellow-400"></div>
+          {/* <div className="rounded-full absolute -top-3 -left-5 -z-20  h-[2em] w-[8em] bg-yellow-400"></div> */}
         </div>
         {/* <div
           className="bg-green-400 absolute h-screen w-full -z-20"
@@ -88,10 +96,15 @@ function RegisterForm() {
             borderEndEndRadius: "70em 70em",
           }}
         ></div> */}
-        <div className="mb:inline-block lg:hidden">FineGoat</div>
       </div>
-      <div className=" h-screen flex justify-center items-center flex-col lg:gap-10 mb:gap-15 ">
-        <div className="shadow-lg p-10 rounded-lg xl:h-1/2  xl:w-[30em] mb:h-[50vh] mb:w-[20em] flex flex-col justify-around items-center bg-white">
+      <div className="xl:hidden mb:flex flex-row justify-center items-center border-2 z-10 border-solid border-black bg-white h-[10vh]">
+        <div className="flex justify-center items-center flex-col ">
+          <span>Fine</span>
+          <span>Goat</span>
+        </div>
+      </div>
+      <div className=" h-screen flex justify-center items-center flex-col gap-10 z-10 ">
+        <div className="shadow-lg p-10 rounded-lg h-1/2 xl:w-[30em] mb:w-[20em] flex flex-col justify-around items-center bg-white mb-[5em]">
           <div className="text-3xl font-bold underline underline-offset-4 tracking-wider">
             Register
           </div>
@@ -101,7 +114,7 @@ function RegisterForm() {
               e.preventDefault();
               openModal();
             }}
-            className="flex flex-col items-center mb:gap-2 justify-between h-1/3 mb-10"
+            className="flex flex-col items-center mb:gap-3 justify-between h-1/3 mb-10"
           >
             <Controller
               name="PhoneNumber"

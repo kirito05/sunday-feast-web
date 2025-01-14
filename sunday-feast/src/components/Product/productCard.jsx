@@ -26,7 +26,7 @@ function ProductCard({ productImg, title, cost, baseWeight }) {
     setTimeout(() => setCardHovered(false), 50);
   };
   return (
-    <Card className="w-[30em] h-[40em] relative">
+    <Card className="xl:w-[30em] xl:h-[40em] mb:w-[15em] mb:h-[30em] relative">
       <CardHeader className="h-[40vh]">
         <Image
           src={productImg}

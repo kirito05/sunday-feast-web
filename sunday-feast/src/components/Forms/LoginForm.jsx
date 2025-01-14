@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import logo from "../../../public/goat-icon.svg";
+import logo from "../../../public/finegoat.png";
+import steak from "../../../public/steak.jpg";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -49,7 +50,6 @@ function LoginForm() {
   };
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [number, setNumber] = useState("");
 
   const closeModal = () => {
     setIsDialogOpen(false);
@@ -65,18 +65,27 @@ function LoginForm() {
   };
 
   return (
-    <div className="grid grid-cols-2 bg-sky-200 ">
+    <div
+      className="xl:grid grid-cols-2 mb:flex flex-col justify-evenly h-screen"
+      style={{
+        backgroundImage: `url(${steak.src})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* <Image src={steak} alt="Login-logo" className="z-0" layout="fill" objectFit="cover" /> */}
       <div
-        style={{
-          borderEndStartRadius: "70em 70em",
-          borderStartEndRadius: "70em 70em",
-        }}
-        className={` bg-green-400 h-screen flex justify-center items-center flex-col relative z-10`}
+        // style={{
+        //   borderEndStartRadius: "7em 7em",
+        //   borderStartEndRadius: "7em 7em",
+        // }}
+        className={` h-screen flex justify-center rounded-full items-center flex-col relative z-10 xl:flex mb:hidden`}
       >
-        <Image src={logo} alt="Login-logo" className="size-[20em]" />
-        <div className="text-[4rem] mt-10 ml-14 tracking-widest relative flex items-center z-10">
-          Grazing Goat
-          <div className="rounded-full absolute -top-3 -left-5 -z-20  h-[2em] w-[8em] bg-yellow-400"></div>
+        <Image src={logo} alt="Login-logo" className="rounded-full" objectFit="cover" layout="fill" />
+        <div className="text-[4rem] mt-10 ml-8 tracking-widest absolute bottom-[0.7em] w-[8em] flex-row justify-center left-[4em] flex items-center z-10 bg-yellow-300 rounded-[5em]" >
+           FineGoat
+          {/* <div className="rounded-full absolute -left-6 -z-20  h-[2em] w-[8em] bg-yellow-400" style={{borderEndStartRadius:"300em 300em",borderEndEndRadius:"300em 300em"}}></div> */}
         </div>
         {/* <div
           className="bg-green-400 absolute h-screen w-full -z-20"
@@ -86,8 +95,14 @@ function LoginForm() {
           }}
         ></div> */}
       </div>
-      <div className=" h-screen flex justify-center items-center flex-col gap-10 ">
-        <div className="shadow-lg p-10 rounded-lg h-1/2 w-[30em] flex flex-col justify-around items-center bg-white">
+      <div className="xl:hidden mb:flex flex-row justify-center items-center border-2 z-10 border-solid border-black bg-white h-[10vh]">
+        <div className="flex justify-center items-center flex-col ">
+          <span>Fine</span>
+          <span>Goat</span>
+        </div>
+      </div>
+      <div className=" h-screen flex justify-center items-center flex-col gap-10 z-10">
+        <div className="shadow-lg p-10 rounded-lg h-1/2 xl:w-[30em]  mb:w-[15em] flex flex-col justify-around items-center bg-white mb-[5em]">
           <div className="text-3xl font-bold underline underline-offset-4 tracking-wider">
             Login
           </div>
