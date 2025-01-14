@@ -61,13 +61,13 @@ function ImageSlider() {
         className="w-full h-full bg-center bg-cover transition-all ease-in-out border-2 border-black border-solid"
         style={{ backgroundImage: `url(${images[currentIndex]})` }}
       ></div>
-      <div className="">
+      <div className="xl:inline-block mb:hidden">
         <ArrowLeftCircle
           className="absolute top-[50%]  left-5 size-10 cursor-pointer hidden group-hover:inline-block bg-slate-200 rounded-full"
           onClick={handlePrev}
         />
       </div>
-      <div >
+      <div className="mb:hidden xl:inline-block" >
         <ArrowRightCircle
           className="absolute top-[50%] right-5 size-10 cursor-pointer hidden group-hover:inline-block bg-slate-200 rounded-full "
           onClick={handleNext}
