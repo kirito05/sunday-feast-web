@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from 'react-hot-toast'
 import "./globals.css";
 
 
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
       <body
       >
         {children}
+        <div><Toaster /></div>
       </body>
     </html>
   );
