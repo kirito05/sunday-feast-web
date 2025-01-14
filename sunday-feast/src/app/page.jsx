@@ -5,6 +5,7 @@ import NavBar from '@/components/navbar/NavBar'
 function page() {
   return (
     <>
+    
     <header>
       <NavBar />
     </header>

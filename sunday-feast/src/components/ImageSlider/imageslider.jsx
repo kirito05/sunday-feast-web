@@ -53,7 +53,7 @@ function ImageSlider() {
 
   return (
     <div
-      className="h-[780px] w-full max-w-[1400] relative group"
+      className="xl:h-[780px] mb:h-[300px] w-full max-w-[1400] relative group"
       onMouseEnter={stopAutoPlayImage}
       onMouseLeave={AutoPlayImage}
     >

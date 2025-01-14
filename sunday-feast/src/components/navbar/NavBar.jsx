@@ -12,6 +12,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 import logo from "../../../public/goat-icon.svg"
 import {RxAvatar} from "react-icons/rx"
+import { RxHamburgerMenu } from "react-icons/rx";
 import { useState } from "react";
 
 function NavBar() {
@@ -23,10 +24,11 @@ function NavBar() {
   };
   return (
     <nav className="flex flex-row justify-between items-center p-4 border-black border-solid border-2 h-28 ">
-      <div>
+      <div className="mb:hidden xl:inline-block">
         <Image src={logo} alt="company logo" />
       </div>
-      <div>
+      <div className="mb:inline-block xl:hidden"> <RxHamburgerMenu /> </div>
+      <div className="mb:hidden xl:inline-block">
         <ul className="flex flex-row items-center justify-center relative">
           <div
             className={`absolute top-0 w-full bg-black h-[0.1rem]`}
@@ -52,6 +54,11 @@ function NavBar() {
           ))}
         </ul>
       </div>
+      <div className="xl:hidden mb:flex mb:flex-col mb:items-start mb:justify-center " >
+        <span className="ml-1 ">FINE</span>
+        <span className="text-3xl">GOAT</span>
+
+      </div>
       <div className="mr-10">
         {isLoggedIn===true?(<DropdownMenu>   
           <DropdownMenuTrigger>
@@ -70,7 +77,7 @@ function NavBar() {
             <DropdownMenuItem>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>):(<div className="flex flex-col items-center justify-center gap-2 cursor-pointer mt-4">
-            <RxAvatar className="size-12"/>
+            <RxAvatar className="xl:size-12 mb:size-9 "/>
         </div>)}
       </div>
     </nav>
