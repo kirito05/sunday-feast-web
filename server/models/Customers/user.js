@@ -36,7 +36,7 @@ const cartItem = new mongoose.Schema({
     },
     Quantity:{
         type:Number,
-        required:true
+        default:1
     }
 })
 

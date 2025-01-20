@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 // const { scryptSync, createDecipheriv } = require("node:crypto");
 // const { Buffer } = require("node:buffer");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 dotenv.config();
 
 const redisClient = redis.createClient({
@@ -42,6 +43,10 @@ const userRegister = async (req, res) => {
         Name: Name,
         PhoneNumber: PhoneNumber,
       });
+      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+        expiresIn: "3h",
+      });
+      await redisClient.setEx(PhoneNumber, 1800, token);
       res.status(200).json({ message: "User Registered Successfully" });
     } else {
       res
