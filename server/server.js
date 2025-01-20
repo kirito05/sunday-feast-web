@@ -12,6 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 dotenv.config();
 const registerRoutes = require('./routes/Account/AccountRegistration/registerRoutes');
+const loginRoutes = require('./routes/Account/AccountLogin/loginRoutes');
 const AdminRoutes = require('./routes/Admin/AdminRoute');
 const productRoutes = require('./routes/Products/ProductRoutes');
 const cartRoutes = require('./routes/Cart/cartRoutes');
@@ -30,6 +31,7 @@ app.use(session({
 }))
 
 app.use('/v1/account', registerRoutes);
+app.use('/v1/account', loginRoutes);
 app.use('/v1/admin', AdminRoutes);
 app.use('/v1/products', productRoutes);
 app.use('/v1/cart', cartRoutes);

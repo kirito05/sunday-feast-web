@@ -5,7 +5,7 @@ const RegisterOtp = require('../../../controllers/CustomerAccount/Register/regis
 
 
 
-router.post('/verification',RegisterOtp);
+router.post('/register-verification',RegisterOtp);
 router.post('/register',userRegister);
 
 
