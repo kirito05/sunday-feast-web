@@ -30,13 +30,12 @@ const address = new mongoose.Schema({
 
 const cartItem = new mongoose.Schema({
     ProductId:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Product',
+        type:String,
         required:true
     },
     Quantity:{
         type:Number,
-        default:1
+        default:1,
     }
 })
 
