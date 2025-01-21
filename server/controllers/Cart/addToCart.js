@@ -1,6 +1,7 @@
 const User = require("../../models/Customers/user");
 const Product = require("../../models/Product/product")
 const AnCart = require("../../models/Anonymous/AnCart");
+const jwt = require("jsonwebtoken");
 
 
 
@@ -17,7 +18,8 @@ const AddToCart = async (req, res) => {
     }
 
     if(token){
-      const userID = req.userID;
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const userID = decoded.id;
       const user = await User.findById(userID);
       if(!user){
         return res.status(404).json({message:"User Not Found"});
