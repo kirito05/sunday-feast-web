@@ -18,6 +18,13 @@ const productRoutes = require('./routes/Products/ProductRoutes');
 const cartRoutes = require('./routes/Cart/cartRoutes');
 
 
+// Cors setup
+app.use(cors({
+    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    credentials: true
+}))
+
+
 
 app.use(session({
     secret: process.env.SESSION_SECRET || 'secret',
