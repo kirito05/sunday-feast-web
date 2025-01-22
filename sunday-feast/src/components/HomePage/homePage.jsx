@@ -4,8 +4,22 @@ import ImageSlider from "../ImageSlider/imageslider";
 import ProductCard from "../Product/productCard";
 import heroImg from "../../../public/hero-section.png";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
+import { data } from "autoprefixer";
 
-function HomePage() {
+const getProductDetails = async () => {
+  const response = await fetch(
+    "http://localhost:5000/v1/products/all-products",
+    {
+      cache: "no-store",
+    }
+  )
+  const data = await response.json();
+  return data;
+};
+
+export default async function HomePage() {
+  const products = await getProductDetails();
+
   return (
     <>
       <div id="homepage-heroSection " className="relative">
@@ -21,7 +35,7 @@ function HomePage() {
               {/* <span className="text-sm absolute bottom-[2rem] right-[7rem]">Where freshness leaps off the plate</span> */}
             </div>
             <div className="flex flex-row justify-between">
-              <div >
+              <div>
                 <div className="mb:text-lg xl:text-3xl">
                   Freshly Tender Mutton, Delivered from Farm to Your Home in
                   Just 6 Hours!
@@ -50,7 +64,7 @@ function HomePage() {
           Catch Of The Day
         </div>
         <div className="mb:hidden xl:grid grid-cols-2 gap-4 mt-[5em] mb-10">
-          <ProductCard />
+          <ProductCard title={products[0].name} />
           <ProductCard />
         </div>
         <div className="mb:inline-block xl:hidden">
@@ -63,12 +77,9 @@ function HomePage() {
               <ProductCard />
             </div>
             <ScrollBar orientation="horizontal" />
-
           </ScrollArea>
         </div>
       </div>
     </>
   );
 }
-
-export default HomePage;
