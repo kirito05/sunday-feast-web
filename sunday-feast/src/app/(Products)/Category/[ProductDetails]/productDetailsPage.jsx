@@ -1,12 +1,15 @@
-import React from "react";
+import React, { Suspense , use} from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import ProductPageCard from "@/components/Product/ProductPageCard";
+
+
 
 function ProductDetailsPage({params}) {
     const {ProductDetails} = params;
   return (
-    <div>
-        <div>Home/{ProductDetails}</div>
-      <h1>Product Details Page</h1>
-    </div>
+    <Suspense fallback = {<Skeleton />}>
+      <ProductPageCard />
+    </Suspense>
   );
 }
 

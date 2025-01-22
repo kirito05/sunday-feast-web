@@ -67,13 +67,4 @@ function ProductCard({ productImg, title, cost, baseWeight }) {
 
 
 
-function ProductPageCard ({}){
-  return (
-    <Card>
-      
-    </Card>
-  )
-
-}
-
 export default ProductCard;
