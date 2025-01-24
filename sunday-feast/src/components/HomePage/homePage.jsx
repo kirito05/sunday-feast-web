@@ -1,10 +1,10 @@
-import React from "react";
+import React, {Suspense} from "react";
 import Image from "next/image";
 import ImageSlider from "../ImageSlider/imageslider";
 import ProductCard from "../Product/productCard";
 import heroImg from "../../../public/hero-section.png";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
-import { data } from "autoprefixer";
+import { Skeleton } from "../ui/skeleton";
 
 const getProductDetails = async () => {
   const response = await fetch(
@@ -14,6 +14,7 @@ const getProductDetails = async () => {
     }
   )
   const data = await response.json();
+  console.log(data);
   return data;
 };
 
@@ -63,9 +64,22 @@ export default async function HomePage() {
         >
           Catch Of The Day
         </div>
-        <div className="mb:hidden xl:grid grid-cols-2 gap-4 mt-[5em] mb-10">
-          <ProductCard title={products[0].name} />
-          <ProductCard />
+        <div className={`mb:hidden ${products.length === 1?"xl:flex":"xl:grid grid-cols-2 gap-4"} mt-[5em] mb-10`}>
+          {/* <ProductCard title={products[0].name} />
+          <ProductCard /> */}
+          <Suspense fallback={<Skeleton />}>
+            {products.map((product) => (
+              <ProductCard
+                key={product._id}
+                title={product.name}
+                productImg={product.image}
+                cost={product.price}
+                baseWeight={product.baseWeight}
+                productId= {product.ProductId}
+              />
+            ))}
+
+          </Suspense>
         </div>
         <div className="mb:inline-block xl:hidden">
           <ScrollArea className="w-[20em]">

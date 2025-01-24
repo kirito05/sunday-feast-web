@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import {useRouter,useSearchParams,usePathname} from "next/navigation";
 import {
   Card,
   CardContent,
@@ -11,8 +12,15 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import axios from "axios";
 
-function ProductCard({ productImg, title, cost, baseWeight }) {
+
+
+
+
+
+function ProductCard({ productImg, title, cost, baseWeight, productId }) {
+  const router = useRouter();
   const [cardHovered, setCardHovered] = useState(false);
   const costPerWeight = (cost, baseWeight) => {
     const pw = (cost * baseWeight) / 1000;
@@ -25,6 +33,16 @@ function ProductCard({ productImg, title, cost, baseWeight }) {
   const handleMouseLeave = () => {
     setTimeout(() => setCardHovered(false), 50);
   };
+
+  
+
+  const handleKnowMore = async () => {
+    router.push(`/Category/mutton/${productId}`);
+    
+
+    
+  }
+
   return (
     <Card className="xl:w-[30em] xl:h-[40em] mb:w-[15em] mb:h-[30em] relative">
       <CardHeader className="h-[40vh]">
@@ -52,7 +70,7 @@ function ProductCard({ productImg, title, cost, baseWeight }) {
           </CardFooter>
         ) : (
           <CardFooter className="w-full flex-col items-center gap-2">
-            <Button className="self-center hover:bg-red-300 hover:scale-105 text-xl p-[1.2em]">
+            <Button className="self-center hover:bg-red-300 hover:scale-105 text-xl p-[1.2em]" onClick={handleKnowMore}>
               Know More
             </Button>
             <Button className="self-center hover:bg-red-300 hover:scale-105 text-xl p-[1.2em]">
