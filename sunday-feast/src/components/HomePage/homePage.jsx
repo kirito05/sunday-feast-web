@@ -83,12 +83,17 @@ export default async function HomePage() {
         </div>
         <div className="mb:inline-block xl:hidden">
           <ScrollArea className="w-[20em]">
-            <div className="flex w-max space-x-4 p-4">
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
+            <div className={`flex w-max space-x-4 ${products.length===1?"ml-5":""} p-4`}>
+              {products.map((product)=>(
+                <ProductCard
+                key={product._id}
+                title={product.name}
+                productImg={product.image}
+                cost={product.price}
+                baseWeight={product.baseWeight}
+                productId= {product.ProductId}
+              />
+              ))}
             </div>
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
