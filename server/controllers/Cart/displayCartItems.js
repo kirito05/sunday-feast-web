@@ -12,7 +12,7 @@ const getCartItems = async (req , res)=>{
     //     return res.status(400).json({message:"ProductId is required"});
     // }
     const token = req.headers['authorization'];
-    const sessionId = req.sessionID;
+    const sessionId = req.headers['sessionid'];
     if(!token && !sessionId){
         return res.status(400).json({message:"Invalid Request"});
     }
@@ -29,7 +29,7 @@ const getCartItems = async (req , res)=>{
         if(!sessionId){
             return res.status(404).json({message:"No session found"});
         }
-        const {CartItems} = await AnCart.findOne({sessionId:sessionId},{Cart:1,_id:0});
+        const CartItems= await AnCart.findOne({sessionId:sessionId},{cartItems:1,_id:0});
         if(!CartItems){
             return res.status(400).json({message:"No items in cart"});
         }
