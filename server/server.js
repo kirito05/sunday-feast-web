@@ -4,11 +4,10 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const redis = require('redis');
-// const {RedisStore} = require('connect-redis');  // for future use
+const {RedisStore} = require('connect-redis'); 
 const session = require('express-session');
 const app = express();
 app.use(express.json());
-app.use(cors());
 app.use(bodyParser.json());
 dotenv.config();
 const registerRoutes = require('./routes/Account/AccountRegistration/registerRoutes');
@@ -20,13 +19,44 @@ const cartRoutes = require('./routes/Cart/cartRoutes');
 
 // Cors setup
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: process.env.CLIENT_URL,
     credentials: true
 }))
 
 
 
+// app.use(session({
+//     secret: process.env.SESSION_SECRET || 'secret',
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: {
+//         secure: false,
+//         httpOnly: true,
+//         maxAge: 7 * 24 * 60 * 60 * 1000
+//     }
+// }))
+
+// Redis connection (for future use)
+
+const redisClient = redis.createClient({
+  url: process.env.REDIS_URL,
+});
+
+if(redisClient.isOpen){
+    console.log("Redis connected");
+}
+else{
+    console.log("Redis not connected");
+}
+
+// Redis store for session management
+
+let redisStore = new RedisStore({
+    client: redisClient
+})
+
 app.use(session({
+    store: redisStore,
     secret: process.env.SESSION_SECRET || 'secret',
     resave: false,
     saveUninitialized: true,
@@ -43,39 +73,6 @@ app.use('/v1/admin', AdminRoutes);
 app.use('/v1/products', productRoutes);
 app.use('/v1/cart', cartRoutes);
 
-
-// Redis connection (for future use)
-
-// const redisClient = redis.createClient({
-//   url: process.env.REDIS_URL,
-// });
-
-// if(redisClient.isOpen){
-//     console.log("Redis connected");
-// }
-// else{
-//     console.log("Redis not connected");
-// }
-
-
-
-// Redis store for session management (for future use)
-
-// let redisStore = new RedisStore({
-//     client: redisClient
-// })
-
-// app.use(session({
-//     store: redisStore,
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//         secure: false,
-//         httpOnly: true,
-//         maxAge: 7 * 24 * 60 * 60 * 1000
-//     }
-// }))
 
 app.get('/', (req, res) => {
     res.send('Server is uup and running');

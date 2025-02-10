@@ -14,7 +14,15 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import axios from "axios";
 
-
+const addProductToCart = async (ProductId,quantity) => {
+  const response = await axios.post("http://localhost:5000/v1/cart/add-to-cart", {
+    ProductId,
+    quantity: quantity || 1
+  },
+  {withCredentials:true}
+);
+  console.log(response);
+}
 
 
 
@@ -34,13 +42,16 @@ function ProductCard({ productImg, title, cost, baseWeight, productId }) {
     setTimeout(() => setCardHovered(false), 50);
   };
 
+  let quantity = 1;
+
   
 
   const handleKnowMore = async () => {
     router.push(`/Category/mutton/${productId}`);
-    
-
-    
+  }
+  const handleAddToCart = async () => {
+    await addProductToCart(productId,quantity);
+    router.push("/cart");
   }
 
   return (
@@ -73,7 +84,7 @@ function ProductCard({ productImg, title, cost, baseWeight, productId }) {
             <Button className="self-center hover:bg-red-300 hover:scale-105 text-xl p-[1.2em]" onClick={handleKnowMore}>
               Know More
             </Button>
-            <Button className="self-center hover:bg-red-300 hover:scale-105 text-xl p-[1.2em]">
+            <Button className="self-center hover:bg-red-300 hover:scale-105 text-xl p-[1.2em]" onClick={handleAddToCart}>
               Add to Cart
             </Button>
           </CardFooter>
